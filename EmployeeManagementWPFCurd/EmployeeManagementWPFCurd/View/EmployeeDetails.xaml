@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="EmployeeManagementWPFCurd.ViewModel.EmployeeDetails"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:EmployeeManagementWPFCurd.ViewModel"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" Width="507.979">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="0*"/>
+        </Grid.ColumnDefinitions>
+        <Canvas>
+            <Label Content="ID" Height="59" Width="50" Canvas.Left="123" Canvas.Top="37"/>
+            <TextBox Text="{Binding Path=MyEmployee.Id , Mode=TwoWay}" Height="45" Width="175" Canvas.Left="292" Canvas.Top="37"/>
+            <Label Content="Name" Height="44" Width="69" Canvas.Left="123" Canvas.Top="119"/>
+            <TextBox Text="{Binding Path=MyEmployee.Name , Mode=TwoWay}" Height="43" Width="175" Canvas.Left="292" Canvas.Top="104"/>
+            <Label Content="Age" Height="51" Width="50" Canvas.Left="123" Canvas.Top="180"/>
+            <TextBox Text="{Binding Path=MyEmployee.Age, Mode=TwoWay}" Height="51" Width="175" Canvas.Left="292" Canvas.Top="180" RenderTransformOrigin="0.671,0.563"/>
+            <Button Command="{Binding Path=Command}" Content="Add" Height="52" Width="85" Canvas.Left="31" Canvas.Top="258"/>
+            <DataGrid   ItemsSource="{Binding Path=MyCollection}" Height="84" Width="436" Canvas.Left="31" Canvas.Top="340"/>
+        </Canvas>
+    </Grid>
+</UserControl>
