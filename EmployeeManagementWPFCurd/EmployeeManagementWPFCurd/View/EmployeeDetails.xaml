@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:EmployeeManagementWPFCurd.ViewModel"
              mc:Ignorable="d" 
-             d:DesignHeight="450" Width="507.979">
+             d:DesignHeight="500" Width="600">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -19,6 +19,9 @@
             <Label Content="Age" Height="51" Width="50" Canvas.Left="123" Canvas.Top="180"/>
             <TextBox Text="{Binding Path=MyEmployee.Age, Mode=TwoWay}" Height="51" Width="175" Canvas.Left="292" Canvas.Top="180" RenderTransformOrigin="0.671,0.563"/>
             <Button Command="{Binding Path=Command}" Content="Add" Height="52" Width="85" Canvas.Left="31" Canvas.Top="258"/>
+            <Button Command="{Binding Path=SearchCommand}" Content="SEARCH" Height="52" Width="88" Canvas.Left="152" Canvas.Top="258"/>
+            <Button Command="{Binding Path=UpdateCommand}" Content="UPDATE" Height="52" Width="84" Canvas.Left="292" Canvas.Top="258"/>
+            <Button Command="{Binding Path=DeleteCommand}"  Content="DELETE" Height="52" Width="68" Canvas.Left="428" Canvas.Top="258" RenderTransformOrigin="0.828,0.773"/>
             <DataGrid   ItemsSource="{Binding Path=MyCollection}" Height="84" Width="436" Canvas.Left="31" Canvas.Top="340"/>
         </Canvas>
     </Grid>

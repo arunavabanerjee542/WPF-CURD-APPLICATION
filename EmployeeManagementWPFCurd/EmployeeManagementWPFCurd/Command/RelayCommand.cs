@@ -19,7 +19,8 @@ namespace EmployeeManagementWPFCurd.Command
         }
 
 
-        public event EventHandler CanExecuteChanged
+        public event EventHandler CanExecuteChanged;
+        /*
         {
             add
             {
@@ -31,6 +32,7 @@ namespace EmployeeManagementWPFCurd.Command
             }
 
         }
+        */
 
         public bool CanExecute(object parameter)
         {

@@ -12,25 +12,27 @@ namespace EmployeeManagementWPFCurd.ViewModel
 {
     class EmployeeViewModel: INotifyPropertyChanged
     {
-
-        public RelayCommand Command { get; set; }
-
+        public RelayCommand Command { get; }
+        public RelayCommand SearchCommand { get; }
+        public RelayCommand UpdateCommand { get; }
+        public RelayCommand DeleteCommand { get; }
         private EmployeeService _employeeService;
         public EmployeeViewModel()
-        {
-            Command = new RelayCommand(CanExecute,Execute);
-            _employeeService = new EmployeeService();
+        {           
+             _employeeService = new EmployeeService();
+             LoadData();
             MyEmployee = new Employee();
-            LoadData();
-           // MyCollection = new ObservableCollection<Employee>();
-           
+            Command = new RelayCommand(CanExecuteAdd, ExecuteAdd);
+            SearchCommand = new RelayCommand(CanExecuteSearch, ExecuteSearch);
+            UpdateCommand = new RelayCommand(CanExecuteUpdate, ExecuteUpdate);
+            DeleteCommand = new RelayCommand(CanExecuteDelete, ExecuteDelete);
         }
 
         private ObservableCollection<Employee> _myCollection;
         public ObservableCollection<Employee> MyCollection
         {
             get { return _myCollection; }
-            set { _myCollection = value; OnPropertyChanged("MyCollection"); }
+            set { _myCollection = value;/* OnPropertyChanged("MyCollection");*/ }
         }
 
         public void LoadData()
@@ -45,8 +47,6 @@ namespace EmployeeManagementWPFCurd.ViewModel
             set { _employee = value; OnPropertyChanged("MyEmployee"); }
         }
 
-
-
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string p)
         {
@@ -54,21 +54,54 @@ namespace EmployeeManagementWPFCurd.ViewModel
                 PropertyChanged(this, new PropertyChangedEventArgs(p));
         }
 
-
-        public bool CanExecute()
+        public bool CanExecuteAdd()
         {
             return true;
         }
 
-        public void Execute()
+        public void ExecuteAdd()
         {
-            _employeeService.Add(MyEmployee);
+            Employee e = new Employee(MyEmployee.Id, MyEmployee.Name, MyEmployee.Age);
+            _employeeService.Add(e);
+            LoadData();
+        }
+
+        public bool CanExecuteSearch()
+        {
+            return true;
+        }
+
+        public void ExecuteSearch()
+        {
+            var emp = _employeeService.Search(MyEmployee.Id);
+            MyEmployee.Name = emp.Name;
+            MyEmployee.Age = emp.Age;
             LoadData();
         }
 
 
+        public bool CanExecuteUpdate()
+        {
+            return true;
+        }
+
+        public void ExecuteUpdate()
+        {
+            _employeeService.Update(MyEmployee);
+            LoadData();
+        }
 
 
+        public bool CanExecuteDelete()
+        {
+            return true;
+        }
+
+        public void ExecuteDelete()
+        {
+            _employeeService.Delete(MyEmployee.Id);
+            LoadData();
+        }
 
 
     }
